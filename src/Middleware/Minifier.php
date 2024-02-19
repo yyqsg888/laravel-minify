@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravelminifier\Minify\Middleware;
+namespace LaravelMinifier\Minify\Middleware;
 
 use Closure;
 use DOMDocument;

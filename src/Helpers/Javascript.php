@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravelminifier\Minify\Helpers;
+namespace LaravelMinifier\Minify\Helpers;
 
 class Javascript
 {

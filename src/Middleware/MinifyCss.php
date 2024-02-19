@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravelminifier\Minify\Middleware;
+namespace LaravelMinifier\Minify\Middleware;
 
-use Laravelminifier\Minify\Helpers\CSS;
+use LaravelMinifier\Minify\Helpers\CSS;
 
 class MinifyCss extends Minifier
 {

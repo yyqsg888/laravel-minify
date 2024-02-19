@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravelminifier\Minify;
+namespace LaravelMinifier\Minify;
 
-use Laravelminifier\Minify\Controllers\HttpConnectionHandler;
+use LaravelMinifier\Minify\Controllers\HttpConnectionHandler;
 use Illuminate\Support\Facades\Route as RouteFacade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 

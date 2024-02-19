@@ -1,5 +1,5 @@
 {
-  "name": "laravelminifier/laravel-minifier",
+  "name": "yyqsg888/laravel-minifier",
   "description": "Minify your blade views, html, css and js files on the fly for Laravel 6, 7, 8, 9 and 10",
   "keywords": [
     "laravel",
@@ -34,7 +34,7 @@
       "src/Helpers.php"
     ],
     "psr-4": {
-      "Fahlisaputra\\Minify\\": "src/"
+      "LaravelMinifier\\Minify\\": "src/"
     }
   },
   "minimum-stability": "dev",
@@ -42,7 +42,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Laravelminifier\\Minify\\MinifyServiceProvider"
+        "LaravelMinifier\\Minify\\MinifyServiceProvider"
       ]
     }
   }
