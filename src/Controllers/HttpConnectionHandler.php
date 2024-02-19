@@ -4,6 +4,7 @@ namespace LaravelMinifier\Minify\Controllers;
 
 use LaravelMinifier\Minify\Helpers\CSS;
 use LaravelMinifier\Minify\Helpers\Javascript;
+use Illuminate\Support\Carbon;
 
 class HttpConnectionHandler
 {
@@ -49,6 +50,7 @@ class HttpConnectionHandler
             'Content-Type' => $mime . '; charset=UTF-8',
             'Cache-Control' => 'public, max-age=31536000',
             'Etag' => $etag = md5($content),
+            'Last-Modified' => Carbon::now()->toRfc7231String(),
         ]);
     }
 }
