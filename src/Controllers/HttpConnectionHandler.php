@@ -48,6 +48,7 @@ class HttpConnectionHandler
         return response($content, 200, [
             'Content-Type' => $mime . '; charset=UTF-8',
             'Cache-Control' => 'public, max-age=31536000',
+            'Etag' => $etag = md5($content),
         ]);
     }
 }
