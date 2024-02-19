@@ -1,9 +1,9 @@
 <?php
 
-namespace Fahlisaputra\Minify\Controllers;
+namespace LaravelMinifier\Minify\Controllers;
 
-use Fahlisaputra\Minify\Helpers\CSS;
-use Fahlisaputra\Minify\Helpers\Javascript;
+use LaravelMinifier\Minify\Helpers\CSS;
+use LaravelMinifier\Minify\Helpers\Javascript;
 
 class HttpConnectionHandler
 {
@@ -44,7 +44,7 @@ class HttpConnectionHandler
         }
 
         return response($content, 200, [
-            'Content-Type' => $mime.'; charset=UTF-8',
+            'Content-Type' => $mime . '; charset=UTF-8',
         ]);
     }
 }

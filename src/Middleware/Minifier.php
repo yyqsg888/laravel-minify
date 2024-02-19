@@ -1,6 +1,6 @@
 <?php
 
-namespace Fahlisaputra\Minify\Middleware;
+namespace LaravelMinifier\Minify\Middleware;
 
 use Closure;
 use DOMDocument;
@@ -117,7 +117,7 @@ abstract class Minifier
 
     protected function matchHtmlTag(string $value, string $tags)
     {
-        if (!preg_match_all('/<'.$tags."[^>]*>(.*?)<\/".$tags.'[^>]*>/is', $value, $matches)) {
+        if (!preg_match_all('/<' . $tags . "[^>]*>(.*?)<\/" . $tags . '[^>]*>/is', $value, $matches)) {
             return null;
         }
 

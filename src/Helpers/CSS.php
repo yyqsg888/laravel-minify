@@ -1,6 +1,6 @@
 <?php
 
-namespace Fahlisaputra\Minify\Helpers;
+namespace LaravelMinifier\Minify\Helpers;
 
 class CSS
 {

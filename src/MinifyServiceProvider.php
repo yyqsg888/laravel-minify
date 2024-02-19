@@ -1,8 +1,8 @@
 <?php
 
-namespace Fahlisaputra\Minify;
+namespace LaravelMinifier\Minify;
 
-use Fahlisaputra\Minify\Controllers\HttpConnectionHandler;
+use LaravelMinifier\Minify\Controllers\HttpConnectionHandler;
 use Illuminate\Support\Facades\Route as RouteFacade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -35,13 +35,13 @@ class MinifyServiceProvider extends BaseServiceProvider
     protected function registerPublishables()
     {
         $this->publishes([
-            __DIR__.'/../config/minify.php' => config_path('minify.php'),
+            __DIR__ . '/../config/minify.php' => config_path('minify.php'),
         ], 'config');
     }
 
     public function registerConfig()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/minify.php', 'minify.php');
+        $this->mergeConfigFrom(__DIR__ . '/../config/minify.php', 'minify.php');
     }
 
     public function registerRoutes()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fahlisaputra\Minify\Middleware;
+namespace LaravelMinifier\Minify\Middleware;
 
 class MinifyHtml extends Minifier
 {
