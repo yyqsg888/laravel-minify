@@ -29,13 +29,13 @@ Minify for Laravel requires PHP 7.2 or higher. This particular version supports 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
 ```sh
-composer require fahlisaputra/laravel-minify
+composer require yyqsg888/laravel-minify
 ```
 ## Configuration
 Minify for Laravel supports optional configuration. To get started, you'll need to publish all vendor assets:
 
 ```sh
-php artisan vendor:publish --provider="Fahlisaputra\Minify\MinifyServiceProvider"
+php artisan vendor:publish --provider="LaravelMinifier\Minify\MinifyServiceProvider"
 ```
 
 This will create a config/minify.php file in your app that you can modify to set your configuration. Also, make sure you check for changes to the original config file in this package between releases.
@@ -47,11 +47,11 @@ In order Minify for Laravel can intercept your request to minify and obfuscate, 
 protected $middleware = [
     ....
     // Middleware to minify CSS
-    \Fahlisaputra\Minify\Middleware\MinifyCss::class,
+    \LaravelMinifier\Minify\Middleware\MinifyCss::class,
     // Middleware to minify Javascript
-    \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
+    \LaravelMinifier\Minify\Middleware\MinifyJavascript::class,
     // Middleware to minify Blade
-    \Fahlisaputra\Minify\Middleware\MinifyHtml::class,
+    \LaravelMinifier\Minify\Middleware\MinifyHtml::class,
 ];
 ```
 You can choose which middleware you want to use. Put all of them if you want to minify html, css, and javascript at the same time.
@@ -129,7 +129,7 @@ You can skip minify by route by adding the route name to the `ignore` array in t
 Laravel Minify is licensed under the [MIT license](LICENSE).
 
 ## Support
-If you are having general issues with this package, feel free to contact us on [saputra@fahli.net](mailto:saputra@fahli.net)
+This project was forked for private development purposes. Support is not provided. Please use original project https://github.com/fahlisaputra/laravel-minify if support is needed.
 
 ## Report Vulnerability
-Please read [our security policy](https://github.com/fahlisaputra/laravel-minify/security/policy) for more details.
+Please read [our security policy](https://github.com/yyqsg888/laravel-minify/security/policy) for more details.
