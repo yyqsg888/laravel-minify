@@ -42,7 +42,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "LaravelMinifier\\Minify\\MinifyServiceProvider"
+        "Laravelminifier\\Minify\\MinifyServiceProvider"
       ]
     }
   }
