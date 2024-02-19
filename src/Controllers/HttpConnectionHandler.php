@@ -34,6 +34,8 @@ class HttpConnectionHandler
             if (preg_match("/\.css$/", $file)) {
                 $content = $css->replace($content, $css_insert_semicolon);
                 $mime = 'text/css';
+            } elseif (preg_match("/\.min\.js$/", $file)) {
+                $mime = 'application/javascript';
             } elseif (preg_match("/\.js$/", $file)) {
                 $content = $js->replace($content, $js_insert_semicolon);
                 if ($obfuscate) {
