@@ -1,5 +1,5 @@
 {
-  "name": "yyqsg888/laravel-minify",
+  "name": "laravel-minifier/laravel-minify",
   "description": "Minify your blade views, html, css and js files on the fly for Laravel 6, 7, 8, 9 and 10",
   "keywords": [
     "laravel",
