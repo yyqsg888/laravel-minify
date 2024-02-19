@@ -29,7 +29,7 @@ Minify for Laravel requires PHP 7.2 or higher. This particular version supports 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
 ```sh
-composer require yyqsg888/laravel-minify
+composer require yyqsg888/laravel-minifier
 ```
 ## Configuration
 Minify for Laravel supports optional configuration. To get started, you'll need to publish all vendor assets:
