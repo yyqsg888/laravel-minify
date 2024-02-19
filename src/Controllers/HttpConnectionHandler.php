@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelMinifier\Minify\Controllers;
+namespace Laravelminifier\Minify\Controllers;
 
-use LaravelMinifier\Minify\Helpers\CSS;
-use LaravelMinifier\Minify\Helpers\Javascript;
+use Laravelminifier\Minify\Helpers\CSS;
+use Laravelminifier\Minify\Helpers\Javascript;
 
 class HttpConnectionHandler
 {

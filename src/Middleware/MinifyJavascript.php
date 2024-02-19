@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelMinifier\Minify\Middleware;
+namespace Laravelminifier\Minify\Middleware;
 
-use LaravelMinifier\Minify\Helpers\Javascript;
+use Laravelminifier\Minify\Helpers\Javascript;
 
 class MinifyJavascript extends Minifier
 {

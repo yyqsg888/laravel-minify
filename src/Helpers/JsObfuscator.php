@@ -2,7 +2,7 @@
 
 // Source: https://github.com/nicxlau/hunter-php-javascript-obfuscator
 
-namespace LaravelMinifier\Minify\Helpers;
+namespace Laravelminifier\Minify\Helpers;
 
 class JsObfuscator
 {
