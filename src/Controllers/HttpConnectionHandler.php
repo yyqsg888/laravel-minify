@@ -4,20 +4,11 @@ namespace LaravelMinifier\Minify\Controllers;
 
 use LaravelMinifier\Minify\Helpers\CSS;
 use LaravelMinifier\Minify\Helpers\Javascript;
-use Illuminate\Support\Carbon;
 
 class HttpConnectionHandler
 {
     public function __invoke($file)
     {
-        $js_insert_semicolon = (bool) config('minify.insert_semicolon.js', true);
-        $css_insert_semicolon = (bool) config('minify.insert_semicolon.css', true);
-        $obfuscate = (bool) config('minify.obfuscate', false);
-        $enabled = (bool) config('minify.assets_enabled', true);
-
-        $css = new CSS();
-        $js = new Javascript();
-
         $path = resource_path($file);
         if (!file_exists($path)) {
             return abort(404);
@@ -26,6 +17,15 @@ class HttpConnectionHandler
         if (!preg_match("/^(css|js)\//", $file)) {
             return abort(404);
         }
+
+        $js_insert_semicolon = (bool) config('minify.insert_semicolon.js', true);
+        $css_insert_semicolon = (bool) config('minify.insert_semicolon.css', true);
+        $obfuscate = (bool) config('minify.obfuscate', false);
+        $enabled = (bool) config('minify.assets_enabled', true);
+
+        $css = new CSS();
+        $js = new Javascript();
+
 
         $content = file_get_contents($path);
         $mime = 'text/plain';
