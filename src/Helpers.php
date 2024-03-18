@@ -7,10 +7,12 @@ function minify($file)
         throw new \Exception('File not found');
     }
 
+    $path .= '?v=' . hash_file('sha256', $path);
+
     // remove slash or backslash from the beginning of the file path
     $file = ltrim($file, '/\\');
 
-    $path = '_minify/'.$file;
+    $path = '_minify/' . $file;
 
     return $path;
 }
