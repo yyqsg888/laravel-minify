@@ -10,8 +10,13 @@ class HttpConnectionHandler
     public function __invoke($file)
     {
         return \Cache::rememberForever('minify_' . $file, function () use ($file) {
+
             $path = resource_path($file);
-            if (!file_exists($path)) {
+
+            $fileExists = \Cache::rememberForever('fileExists_' . $file, function () use ($path) {
+                return file_exists($path);
+            });
+            if (!$fileExists) {
                 return abort(404);
             }
 

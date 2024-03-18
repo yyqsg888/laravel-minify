@@ -3,8 +3,13 @@
 function minify($file)
 {
     return Cache::rememberForever('minify_path_' . $file, function () use ($file) {
+
         $path = resource_path($file);
-        if (!file_exists($path)) {
+
+        $fileExists = \Cache::rememberForever('fileExists_' . $file, function () use ($path) {
+            return file_exists($path);
+        });
+        if (!$fileExists) {
             throw new \Exception('File not found');
         }
 
@@ -24,8 +29,13 @@ function minify($file)
 function minify_noversioning($file)
 {
     return Cache::rememberForever('minify_path_' . $file, function () use ($file) {
+
         $path = resource_path($file);
-        if (!file_exists($path)) {
+
+        $fileExists = \Cache::rememberForever('fileExists_' . $file, function () use ($path) {
+            return file_exists($path);
+        });
+        if (!$fileExists) {
             throw new \Exception('File not found');
         }
 
