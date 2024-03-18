@@ -9,6 +9,8 @@ function minify($file)
 
     $path .= '?v=' . hash_file('sha256', $path);
 
+    \Log::warning('File hashed: ' . $path);
+
     // remove slash or backslash from the beginning of the file path
     $file = ltrim($file, '/\\');
 
