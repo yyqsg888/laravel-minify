@@ -13,10 +13,7 @@ class HttpConnectionHandler
 
             $path = resource_path($file);
 
-            $fileExists = \Cache::rememberForever('fileExists_' . $file, function () use ($path) {
-                return file_exists($path);
-            });
-            if (!$fileExists) {
+            if (!$file_exists($path)) {
                 return abort(404);
             }
 
@@ -31,7 +28,6 @@ class HttpConnectionHandler
 
             $css = new CSS();
             $js = new Javascript();
-
 
             $content = file_get_contents($path);
             $mime = 'text/plain';
@@ -50,8 +46,6 @@ class HttpConnectionHandler
                     }
                     $mime = 'application/javascript';
                 }
-
-                \Log::warning('File minified: ' . $path);
             }
 
             return response($content, 200, [
