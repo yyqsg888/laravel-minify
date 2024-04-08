@@ -14,7 +14,6 @@ function minify($file)
         }
 
         $hash = hash_file('sha256', $path);
-        \Log::warning('File hashed: ' . $path);
 
         // remove slash or backslash from the beginning of the file path
         $file = ltrim($file, '/\\');
@@ -38,8 +37,6 @@ function minify_noversioning($file)
         if (!$fileExists) {
             throw new \Exception('File not found');
         }
-
-        \Log::warning('File no versioning: ' . $path);
 
         // remove slash or backslash from the beginning of the file path
         $file = ltrim($file, '/\\');
