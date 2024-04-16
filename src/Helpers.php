@@ -1,50 +1,43 @@
 <?php
-use LaravelMinifier\Minify\Controllers\HttpConnectionHandler;
+
+static $minify_path_array = [];
 
 function minify($file)
 {
-    if (!isset(HttpConnectionHandler::$minifiedPaths[$file]) || is_null(HttpConnectionHandler::$minifiedPaths[$file])) {
-        HttpConnectionHandler::$minifiedPaths[$file] = Cache::rememberForever('minify_path_' . $file, function () use ($file) {
-
-            $path = resource_path($file);
-
-            if (!file_exists($path)) {
-                throw new \Exception('File not found');
-            }
-
-            $hash = hash_file('sha256', $path);
-
-            // remove slash or backslash from the beginning of the file path
-            $file = ltrim($file, '/\\');
-
-            $path = '_minify/' . $file;
-            $path .= '?v=' . $hash;
-
-            return $path;
-        });
-    }
-
-    return HttpConnectionHandler::$minifiedPaths[$file];
+    return minifier($file, true);
 }
-
 function minify_noversioning($file)
 {
-    if (!isset(HttpConnectionHandler::$minifiedPaths[$file]) || is_null(HttpConnectionHandler::$minifiedPaths[$file])) {
-        HttpConnectionHandler::$minifiedPaths[$file] = Cache::rememberForever('minify_path_' . $file, function () use ($file) {
+    return minifier($file, false);
+}
+function minifier($file, $versioning)
+{
+    global $minify_path_array;
 
-            $path = resource_path($file);
-
-            if (!file_exists($path)) {
-                throw new \Exception('File not found');
-            }
-
-            // remove slash or backslash from the beginning of the file path
-            $file = ltrim($file, '/\\');
-
-            $path = '_minify/' . $file;
-
-            return $path;
+    if (!isset($minify_path_array[$file])) {
+        $minify_path_array = Cache::rememberForever('minify_path', function () {
+            return [];
         });
     }
-    return HttpConnectionHandler::$minifiedPaths[$file];
+
+    if (!isset($minify_path_array[$file])) {
+        $path = resource_path($file);
+
+        if (!file_exists($path)) {
+            throw new \Exception('File not found');
+        }
+
+        $hash = hash_file('sha256', $path);
+
+        $path = '_minify/' . ltrim($file, '/\\'); // remove slash or backslash from the beginning of the file path
+        if ($versioning) {
+            $path .= '?v=' . $hash;
+        }
+
+        $minify_path_array[$file] = $path;
+
+        Cache::put('minify_path', $minify_path_array);
+    }
+
+    return $minify_path_array[$file];
 }
