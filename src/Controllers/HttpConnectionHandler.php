@@ -12,7 +12,7 @@ class HttpConnectionHandler
 
     public function __invoke($file)
     {
-        if (is_null(HttpConnectionHandler::$minifiedFiles[$file])) {
+        if (!HttpConnectionHandler::$minifiedFiles[$file] || is_null(HttpConnectionHandler::$minifiedFiles[$file])) {
             HttpConnectionHandler::$minifiedFiles[$file] = \Cache::rememberForever('minify_' . $file, function () use ($file) {
 
                 $path = resource_path($file);

@@ -3,7 +3,7 @@ use LaravelMinifier\Minify\Controllers\HttpConnectionHandler;
 
 function minify($file)
 {
-    if (is_null(HttpConnectionHandler::$minifiedPaths[$file])) {
+    if (!HttpConnectionHandler::$minifiedPaths[$file] || is_null(HttpConnectionHandler::$minifiedPaths[$file])) {
         HttpConnectionHandler::$minifiedPaths[$file] = Cache::rememberForever('minify_path_' . $file, function () use ($file) {
 
             $path = resource_path($file);
