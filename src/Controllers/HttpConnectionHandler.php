@@ -7,51 +7,57 @@ use LaravelMinifier\Minify\Helpers\Javascript;
 
 class HttpConnectionHandler
 {
+    public static $minifiedPaths = [];
+    public static $minifiedFiles = [];
+
     public function __invoke($file)
     {
-        return \Cache::rememberForever('minify_' . $file, function () use ($file) {
+        if (is_null(HttpConnectionHandler::$minifiedFiles[$file])) {
+            HttpConnectionHandler::$minifiedFiles[$file] = \Cache::rememberForever('minify_' . $file, function () use ($file) {
 
-            $path = resource_path($file);
+                $path = resource_path($file);
 
-            if (!file_exists($path)) {
-                return abort(404);
-            }
-
-            if (!preg_match("/^(css|js)\//", $file)) {
-                return abort(404);
-            }
-
-            $js_insert_semicolon = (bool) config('minify.insert_semicolon.js', true);
-            $css_insert_semicolon = (bool) config('minify.insert_semicolon.css', true);
-            $obfuscate = (bool) config('minify.obfuscate', false);
-            $enabled = (bool) config('minify.assets_enabled', true);
-
-            $css = new CSS();
-            $js = new Javascript();
-
-            $content = file_get_contents($path);
-            $mime = 'text/plain';
-
-            // due to support only for css and js (issue #9)
-            if ($enabled) {
-                if (preg_match("/\.css$/", $file)) {
-                    $content = $css->replace($content, $css_insert_semicolon);
-                    $mime = 'text/css';
-                } elseif (preg_match("/\.min\.js$/", $file)) {
-                    $mime = 'application/javascript';
-                } elseif (preg_match("/\.js$/", $file)) {
-                    $content = $js->replace($content, $js_insert_semicolon);
-                    if ($obfuscate) {
-                        $content = $js->obfuscate($content);
-                    }
-                    $mime = 'application/javascript';
+                if (!file_exists($path)) {
+                    return abort(404);
                 }
-            }
 
-            return response($content, 200, [
-                'Content-Type' => $mime . '; charset=UTF-8',
-                'Cache-Control' => 'public, max-age=31536000, s-maxage=31536000, immutable',
-            ]);
-        });
+                if (!preg_match("/^(css|js)\//", $file)) {
+                    return abort(404);
+                }
+
+                $js_insert_semicolon = (bool) config('minify.insert_semicolon.js', true);
+                $css_insert_semicolon = (bool) config('minify.insert_semicolon.css', true);
+                $obfuscate = (bool) config('minify.obfuscate', false);
+                $enabled = (bool) config('minify.assets_enabled', true);
+
+                $css = new CSS();
+                $js = new Javascript();
+
+                $content = file_get_contents($path);
+                $mime = 'text/plain';
+
+                // due to support only for css and js (issue #9)
+                if ($enabled) {
+                    if (preg_match("/\.css$/", $file)) {
+                        $content = $css->replace($content, $css_insert_semicolon);
+                        $mime = 'text/css';
+                    } elseif (preg_match("/\.min\.js$/", $file)) {
+                        $mime = 'application/javascript';
+                    } elseif (preg_match("/\.js$/", $file)) {
+                        $content = $js->replace($content, $js_insert_semicolon);
+                        if ($obfuscate) {
+                            $content = $js->obfuscate($content);
+                        }
+                        $mime = 'application/javascript';
+                    }
+                }
+
+                return response($content, 200, [
+                    'Content-Type' => $mime . '; charset=UTF-8',
+                    'Cache-Control' => 'public, max-age=31536000, s-maxage=31536000, immutable',
+                ]);
+            });
+        }
+        return HttpConnectionHandler::$minifiedFiles[$file];
     }
 }
