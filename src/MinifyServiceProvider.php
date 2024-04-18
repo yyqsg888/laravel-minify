@@ -46,6 +46,7 @@ class MinifyServiceProvider extends BaseServiceProvider
 
     public function registerRoutes()
     {
+        \Log::debug('Route is running');
         RouteFacade::get('/_minify/{file?}', HttpConnectionHandler::class)
             ->where('file', '(.*)')
             ->name('minify.assets');
