@@ -12,10 +12,12 @@ class HttpConnectionHandler
     {
         $minify_cache_enabled = (bool) config('minify.cache_enabled', true);
         if (!$minify_cache_enabled) {
+            \Log::debug('Forgetting cache');
             \Cache::forget('minify_' . $file);
         }
 
         return \Cache::rememberForever('minify_' . $file, function () use ($file) {
+            \Log::debug('Rerunning cache');
             $path = resource_path($file);
 
             if (!file_exists($path)) {
