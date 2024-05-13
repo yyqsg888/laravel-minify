@@ -14,6 +14,12 @@ function minifier($file, $versioning)
 {
     global $minify_path_array;
 
+    $minify_cache_enabled = (bool) config('minify.cache_enabled', true);
+    if (!$minify_cache_enabled) {
+        \Cache::forget('minify_path');
+        $minify_path_array = [];
+    }
+
     if (!isset($minify_path_array[$file])) {
         $minify_path_array = Cache::rememberForever('minify_path', function () {
             return [];
