@@ -10,7 +10,7 @@ class HttpConnectionHandler
     // Static variables useless as each call to a file is in a new request
     public function __invoke($file)
     {
-        $minify_cache_enabled = (bool) config('minify.insert_semicolon.js', true);
+        $minify_cache_enabled = (bool) config('minify.cache_enabled', true);
         if (!$minify_cache_enabled) {
             \Cache::forget('minify_' . $file);
         }

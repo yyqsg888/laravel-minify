@@ -22,7 +22,7 @@ return [
     | Default: true
     |
     */
-    'minify_cache_enabled' => env('MINIFY_CACHE_ENABLED', true),
+    'cache_enabled' => env('MINIFY_CACHE_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
