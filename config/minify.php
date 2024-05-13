@@ -12,6 +12,20 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Minify Cache Enabled
+    |--------------------------------------------------------------------------
+    |
+    | This option enables minify cache. 
+    | If enabled, paths and files are cached. 
+    | If disabled, they're not cached and will be recompiled on each request.
+    |
+    | Default: true
+    |
+    */
+    'minify_cache_enabled' => env('MINIFY_CACHE_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Minify Blade Views
     |--------------------------------------------------------------------------
     |
@@ -57,7 +71,7 @@ return [
     */
     'insert_semicolon' => [
         'css' => env('MINIFY_CSS_SEMICOLON', false),
-        'js'  => env('MINIFY_JS_SEMICOLON', false),
+        'js' => env('MINIFY_JS_SEMICOLON', false),
     ],
 
     /*
